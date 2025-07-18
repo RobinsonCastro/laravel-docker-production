@@ -34,8 +34,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/templates/default.conf.template
-      - storage:/var/www/storage:rw
-      - public:/var/www/public:ro
+      - ./backend:/var/www
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
@@ -57,8 +56,7 @@ services:
     env_file:
       - ./backend/.env
     volumes:
-      - storage:/usr/share/nginx/html/storage:rw
-      - public:/usr/share/nginx/html/public:rw
+      - ./backend:/var/www:delegated
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.reverb.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
