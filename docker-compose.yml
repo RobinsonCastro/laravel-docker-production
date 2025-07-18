@@ -4,15 +4,11 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports:
-      - 9000:9000
+    volumes:
+      - storage:/var/www/storage:rw
+      - public:/var/www/public:rw
     depends_on:
       - db
-    env_file:
-      - ./backend/.env
-    volumes:
-      - storage:/usr/share/nginx/html/storage:rw
-      - public:/usr/share/nginx/html/public:rw
     networks:
       - web
 
@@ -36,12 +32,12 @@ services:
       - web
 
   nginx:
-    image: nginx:1-alpine
+    image: nginx:1.29-alpine
     restart: unless-stopped
     volumes:
       - ./nginx.conf:/etc/nginx/templates/default.conf.template
-      - storage:/usr/share/nginx/html/storage:rw
-      - public:/usr/share/nginx/html/public:ro
+      - storage:/var/www/storage:rw
+      - public:/var/www/public:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
