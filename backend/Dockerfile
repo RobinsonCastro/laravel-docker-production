@@ -35,12 +35,7 @@ RUN sed 's_@php artisan package:discover_/bin/true_;' -i composer.json \
     && chown -R www-data:www-data storage \
     && mkdir -p storage/framework/sessions storage/framework/views storage/framework/cache
 
-# Copy entrypoint
-COPY ./scripts/php-fpm-entrypoint /usr/local/bin/php-entrypoint
+CMD ["php-fpm", "-F"]
 
-# Give permisisons to everything in bin/
-RUN chmod a+x /usr/local/bin/*
-
-CMD ["/usr/local/bin/php-entrypoint", "php-fpm"]
 
 
