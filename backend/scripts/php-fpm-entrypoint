@@ -7,8 +7,8 @@ main() {
         prepare_file_permissions
         run_npm_build
         prepare_storage
-        wait_for_db
-        run_migrations
+        # wait_for_db
+        # run_migrations
         optimize_app
         run_server "$@"
     fi
