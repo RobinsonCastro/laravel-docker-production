@@ -41,7 +41,6 @@ COPY ./scripts/php-fpm-entrypoint /usr/local/bin/php-entrypoint
 # Give permisisons to everything in bin/
 RUN chmod a+x /usr/local/bin/*
 
-ENTRYPOINT ["/usr/local/bin/php-entrypoint"]
+CMD ["/usr/local/bin/php-entrypoint", "php-fpm"]
 
-CMD ["php-fpm"]
 
