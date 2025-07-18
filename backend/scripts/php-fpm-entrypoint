@@ -62,7 +62,7 @@ optimize_app() {
 }
 
 run_server() {
-    exec /usr/local/bin/docker-php-entrypoint "$@"
+    exec php-fpm
 }
 
 main "$@"
