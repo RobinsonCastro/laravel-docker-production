@@ -44,7 +44,7 @@ services:
       - public:/usr/share/nginx/html/public:ro
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nginx.rule=Host(`robinsoncastro.com`, `www.robinsoncastro.com`)"
+      - "traefik.http.routers.nginx.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls.certresolver=lets-encrypt"
       - "traefik.http.services.nginx.loadbalancer.server.port=80"
@@ -67,7 +67,7 @@ services:
       - public:/usr/share/nginx/html/public:rw
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.reverb.rule=Host(`reverb.robinsoncastro.com`)"
+      - "traefik.http.routers.reverb.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
       - "traefik.http.routers.reverb.entrypoints=websecure"
       - "traefik.http.routers.reverb.tls.certresolver=lets-encrypt"
       - "traefik.http.routers.reverb.service=reverb"
