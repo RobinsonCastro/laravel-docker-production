@@ -102,8 +102,6 @@ services:
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
 
 volumes:
-  storage:
-  public:
   db-data:
   redis-data:
 
