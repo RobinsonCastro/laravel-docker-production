@@ -5,8 +5,7 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
-      - storage:/var/www/storage:rw
-      - public:/var/www/public:rw
+      - ./backend:/var/www:delegated
     depends_on:
       - db
     networks:
@@ -26,8 +25,7 @@ services:
       - db
       - redis
     volumes:
-      - storage:/usr/share/nginx/html/storage:rw
-      - public:/usr/share/nginx/html/public:rw
+      - ./backend:/var/www:delegated
     networks:
       - web
 
