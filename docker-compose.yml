@@ -13,6 +13,8 @@ services:
     volumes:
       - storage:/usr/share/nginx/html/storage:rw
       - public:/usr/share/nginx/html/public:rw
+    networks:
+      - web  
   queue-worker:
     build:
       context: ./backend
@@ -29,6 +31,8 @@ services:
     volumes:
       - storage:/usr/share/nginx/html/storage:rw
       - public:/usr/share/nginx/html/public:rw
+    networks:
+      - web  
   nginx:
     image: nginx:1-alpine
     restart: unless-stopped
