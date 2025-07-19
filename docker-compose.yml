@@ -7,7 +7,7 @@ services:
     volumes:
       - ./backend:/var/www:delegated
     depends_on:
-      - db
+      - mysql
     networks:
       - web
 
@@ -22,7 +22,7 @@ services:
     env_file:
       - ./backend/.env
     depends_on:
-      - db
+      - mysql
       - redis
     volumes:
       - ./backend:/var/www:delegated
