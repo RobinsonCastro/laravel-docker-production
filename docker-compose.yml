@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: app1-app
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -12,6 +13,7 @@ services:
       - web
 
   queue-worker:
+    container_name: app1-queue-worker
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -30,6 +32,7 @@ services:
       - web
 
   nginx:
+    container_name: app1-nginx
     image: nginx:1.29-alpine
     restart: unless-stopped
     volumes:
@@ -61,6 +64,7 @@ services:
     networks:
       - web  
   reverb:
+    container_name: app1-reverb
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -85,22 +89,6 @@ services:
       - web
     expose:
       - "8080"
-  redis:
-    image: bitnami/redis:7.2
-    platform: linux/amd64
-    ports:
-      - 6379:6379
-    restart: always
-    volumes:
-      - redis-data:/bitnami/redis/data
-    environment:
-      - ALLOW_EMPTY_PASSWORD=no
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-
-volumes:
-  db-data:
-  redis-data:
 
 networks:
   web:
