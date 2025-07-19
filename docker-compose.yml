@@ -46,7 +46,20 @@ services:
       - web
     expose:
       - "80"
-
+  mysql:
+    image: 'mysql:8.0'
+    container_name: app1-mysql
+    ports:
+      - '33061:3306'
+    environment:
+      MYSQL_DATABASE: "app1-db"
+      MYSQL_USER: "rob"
+      MYSQL_PASSWORD: "xxx"
+      MYSQL_ROOT_PASSWORD: "xxx"
+    volumes:
+      - ./.dbdata:/var/lib/mysql
+    networks:
+      - web  
   reverb:
     build:
       context: ./backend
@@ -72,20 +85,6 @@ services:
       - web
     expose:
       - "8080"
-
-  db:
-    image: bitnami/postgresql:16.3.0
-    platform: linux/amd64
-    ports:
-      - 5432:5432
-    restart: always
-    volumes:
-      - db-data:/bitnami/postgresql
-    environment:
-      - POSTGRESQL_DATABASE=${POSTGRESQL_DATABASE}
-      - POSTGRESQL_USERNAME=${POSTGRESQL_USERNAME}
-      - POSTGRESQL_PASSWORD=${POSTGRESQL_PASSWORD}
-
   redis:
     image: bitnami/redis:7.2
     platform: linux/amd64
