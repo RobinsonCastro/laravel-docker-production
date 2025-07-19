@@ -5,7 +5,6 @@ RUN apt-get update && apt-get install -y \
     icu-dev \
     zip \
     libzip-dev \
-    supervisor \
     && docker-php-ext-install mysqli pdo pdo_mysql zip \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
