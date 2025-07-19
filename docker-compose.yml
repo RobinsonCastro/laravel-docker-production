@@ -2,7 +2,7 @@ services:
   app:
     container_name: app1-app
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
@@ -15,7 +15,7 @@ services:
   queue-worker:
     container_name: app1-queue-worker
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     restart: unless-stopped
     command: php artisan queue:work
@@ -61,11 +61,11 @@ services:
     volumes:
       - ./.dbdata:/var/lib/mysql
     networks:
-      - web  
+      - web
   reverb:
     container_name: app1-reverb
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     command: php artisan reverb:start
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
       - ./backend:/var/www:delegated
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.reverb.rule=Host(`robinsoncastro.com`) || Host(`www.robinsoncastro.com`)"
+      - "traefik.http.routers.reverb.rule=Host(`reverb.robinsoncastro.com`) || Host(`www.reverb.robinsoncastro.com`)"
       - "traefik.http.routers.reverb.entrypoints=websecure"
       - "traefik.http.routers.reverb.tls.certresolver=lets-encrypt"
       - "traefik.http.routers.reverb.service=reverb"
