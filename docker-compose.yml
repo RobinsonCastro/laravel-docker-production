@@ -2,7 +2,7 @@ services:
   app:
     container_name: app1-app
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     volumes:
@@ -15,7 +15,7 @@ services:
   queue-worker:
     container_name: app1-queue-worker
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     restart: unless-stopped
     command: php artisan queue:work
@@ -65,7 +65,7 @@ services:
   reverb:
     container_name: app1-reverb
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     command: php artisan reverb:start
     restart: unless-stopped
