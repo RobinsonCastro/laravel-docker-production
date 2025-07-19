@@ -1,7 +1,7 @@
 FROM php:8.3-fpm
 
 # Instalar dependências
-RUN apk update && apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     icu-dev \
     zip \
     libzip-dev \
@@ -11,9 +11,6 @@ RUN apk update && apk add --no-cache \
     && docker-php-ext-install intl \
     && docker-php-ext-configure pcntl --enable-pcntl \
     && docker-php-ext-install pcntl
-
-# Instalar extensões PHP
-RUN docker-php-ext-install bcmath gd zip
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
