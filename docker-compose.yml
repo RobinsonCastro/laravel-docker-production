@@ -25,7 +25,6 @@ services:
       - ./backend/.env
     depends_on:
       - mysql
-      - redis
     volumes:
       - ./backend:/var/www:delegated
     networks:
