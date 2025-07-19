@@ -1,15 +1,19 @@
 FROM php:8.3-fpm
 
-# Instalar dependências
+# Instalar dependências do sistema
 RUN apt-get update && apt-get install -y \
-    icu-dev \
-    zip \
     libzip-dev \
-    && docker-php-ext-install mysqli pdo pdo_mysql zip \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && docker-php-ext-configure pcntl --enable-pcntl \
-    && docker-php-ext-install pcntl
+    libpng-dev \
+    default-mysql-client \
+    unzip \
+    git \
+    curl \
+    zip \
+    npm \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Instalar extensões PHP necessárias
+RUN docker-php-ext-install pdo_mysql bcmath gd zip
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
